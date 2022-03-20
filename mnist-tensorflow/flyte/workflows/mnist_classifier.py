@@ -7,6 +7,7 @@ from dataclasses_json import dataclass_json
 from flytekit import Resources, task, workflow
 from flytekit.types.directory import FlyteDirectory
 
+
 @dataclass_json
 @dataclass
 class Hyperparameters(object):
@@ -15,6 +16,7 @@ class Hyperparameters(object):
         batch_size: input batch size for training (default: 64)
         epochs: number of epochs to train (default: 10)
     """
+
     batch_size: int = 64
     epochs: int = 10
 
@@ -54,14 +56,12 @@ def tf_mnist_task(hp: Hyperparameters) -> TrainingOutputs:
     X, y = get_data()
 
     model.compile(
-    loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
-    optimizer=tf.keras.optimizers.RMSprop(),
-    metrics=["accuracy"],
+        loss=tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True),
+        optimizer=tf.keras.optimizers.RMSprop(),
+        metrics=["accuracy"],
     )
 
-    history = model.fit(
-        X, y, batch_size=hp.batch_size, epochs=hp.epochs
-    )
+    history = model.fit(X, y, batch_size=hp.batch_size, epochs=hp.epochs)
 
     model.save("my_model")
     return TrainingOutputs(model_dir=FlyteDirectory("my_model"))
