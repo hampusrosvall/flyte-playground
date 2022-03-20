@@ -1,5 +1,5 @@
 # Learning Flyte
-Repository for Flyte learning and experimentation.
+Repository for [Flyte](https://docs.flyte.org/en/latest/) learning and experimentation.
 
 ## Structure
 Each sub-folder aims to contain some useful example with additional documentation on usage using Flyte Sandbox environment.
